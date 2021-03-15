@@ -1,6 +1,13 @@
-var x = 5;
 
-if (10<x){
-    if (x<20) 
-    console.log(x);
-  }
+
+function sum(...args) {
+  var result = 0;
+
+  console.log(args);
+  // for (var i = 0; i < arguments.length; i++)
+  //   result =+ arguments[i];
+  // }
+  return result;
+}
+
+console.log(sum(1,2,3,4));
