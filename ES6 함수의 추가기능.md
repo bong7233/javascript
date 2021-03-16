@@ -288,3 +288,30 @@ class Derived extends Base {
 const derived = new Derived('Lee');
 console.log(derived.sayHi()); // Hi! Lee how are you doing?
 ```
+### arguments
+- 화살표함수는 arguments 바인딩 갖지않음, this super와 마찬가가지로 상위스코프의 arguments 참조
+- 화살표함수에서는 arguments 객체를 사용할 수 없음(상위스코프 참조는 가능하지만 자신에게 전달된 인수목록 확인불가능이라 도움되지않음)
+- 그래서 사용하는것이 Rest 파라미터
+### Rest 파라미터
+- Rest파라미터(나머지 매개변수)는 매개변수이름앞 ...을 붙여 정의한 매개변수
+- 인수들의 목록을 **배열** 로 전달받음
+```
+function foo(...rest) {
+  // 매개변수 rest는 인수들의 목록을 배열로 전달받는 Rest 파라미터다.
+  console.log(rest); // [ 1, 2, 3, 4, 5 ]
+}
+
+foo(1, 2, 3, 4, 5);
+```
+- 일반 매개변수와 Rest 파라미터 동시사용 가능. 이때 인수들은 매개변수와 Rest 파라미터에 순차적으로 할당.(Rest파라미터는 반드시 마지막자리에 하나만 사용)
+    - function bar(param1, param2, ...rest)
+- Rest파라미터는 **length 프로퍼티(함수정의시 선언한 매개변수를 갯수)에 영향주지않음**
+
+### Rest파라미터와 arguments객체
+- ES5에서는 함수정의 시 가변인자 함수(매개변수의 개수 미정)는 매개변수를 통해 인수를 전달받는 것이 불가능, arguments 객체를 활용하여 인수 받음
+- arguments 객체 : 함수 호출 시 전달된 인수(argument)들의 정보를 담고 있는, 순회 가능한(iterable) 유사 배열 객체(array-like object)
+    - 함수 내부에서 지역 변수처럼 사용가능
+    - but 유사배열객체라 call,apply메서드로 배열로 변환해야함...비효율적
+- **BUT** ES6 에서는 rest 파라미터를 써서 인수목록을 배열로 직접받음
+- 결론은 화살표함수로 가변인자함수 구현? 무조건 Rest파라미터사용
+
