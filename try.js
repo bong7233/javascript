@@ -9,3 +9,7 @@ console.log(arr); // [1, 2, 3]
 // 더 많은수인 6을할당
 arr.length = 6;
 console.log(arr); // [1,2,3, <3 empty items> ]
+
+
+const result = [1, 2, 3].forEach(console.log);
+console.log(result); // undefined
