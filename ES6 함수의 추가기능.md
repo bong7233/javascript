@@ -264,3 +264,27 @@ class Person {
 const person = new Person();
 person.sayHi(); // Hi Lee
 ```
+---
+### super
+- 화살표함수는 함수자체 super바인딩 갖지않음, 참조하면 상위스코프 super참조
+- super는 내부 슬롯 [[HomeObject]] 갖는 ES6메서드 내에서만 사용가능한 키워드
+- 여기서 클래스의 constructor는 암묵적으로 생성된다
+```
+class Base {
+  constructor(name) {
+    this.name = name;
+  }
+
+  sayHi() {
+    return `Hi! ${this.name}`;
+  }
+}
+
+class Derived extends Base {
+  // 화살표 함수의 super는 상위 스코프인 constructor의 super를 가리킨다.
+  sayHi = () => `${super.sayHi()} how are you doing?`;
+}
+
+const derived = new Derived('Lee');
+console.log(derived.sayHi()); // Hi! Lee how are you doing?
+```
