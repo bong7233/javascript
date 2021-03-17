@@ -74,5 +74,93 @@ new Date('2020/03/26/10:00:00');
 - 1970/1/1 기준 인수로 전달된 지정시간까지의 밀리초 반환
     - 이때 지정시간은 new Date(dateString) 인수와 동일한 형식이여야함
 ### Date.UTC
-- 1970/1/1 기준 인수로 전달된 지정시간까지의
+    - 1970/1/1 기준 인수로 전달된 지정시간까지의
     - 이때 인수는 그냥 숫자로 가능 // 1980.0.2 ...
+### Date.prototype.getFullYear
+- 객체의 연도 나타내는 정수 반환
+### Date.prototype.setFullYear
+- 객체에 연도를 나타내는 정수 설정 ( 월 일 도 옵션가능)
+### Date.prototype.getMonth
+- 객체의 월을 나타내는 정수 0~11 반환
+### Date.prototype.setMonth
+- 객체에 월을 나타내는 정수 0~11 설정
+### Date.prototype.getDate
+- 객체의 날짜 1~31 반환
+### Date.prototype.setDate
+- 객체에 날짜 1~31 설정
+### Date.prototype.getDay
+- 객체의 요일 일요일0 ~ 토요일6 정수 반환
+### Date.prototype.getHours
+- 객체의 시간 0~23 정수 반환
+### Date.prototype.getMinutes
+- 객체의 분 0~59 정수 반환
+### Date.prototype.setMinutes
+- 객체에 분 0~59 정수 설정
+### Date.prototype.getSeconds
+- 객체의 초 0~59 정수 반환
+### Date.prototype.setSeconds
+- 객체에 초 0~59 정수 설정
+### Date.prototype.getMilliseconds
+- 객체에 밀리초 0~999 정수 반환
+### Date.prototype.setMilliseconds
+- 객체에 밀리초 0~999 정수 반환
+### Date.prototype.getTime
+- UTC기점 객체시간까지 경과된 밀리초 반환
+### Date.prototype.setTime
+- UTC기점 객체시간에 경과된 밀리초 설정
+### Date.prototype.getTimezoneOffset
+- UTC 와 객체의 시간차이를 분단위로 반환
+### Date.prototype.toDateString
+- 읽을수있는 문자열로 객체 날짜반환
+### Date.prototype.toTimeString
+- 읽을수있는 문자열로 객체 시간반환
+### Date.prototype.toISOSting
+- ISO8601 형식으로 객체 날짜시간을 문자열 반환
+### Date.prototype.toLocaleString
+- 로캘기준 객체의 날짜시간을 문자열 반환, 인수생략시 브라우저의 로캘적용
+### Date.prototype.toLocaleTimeString
+- 로캘기준 객체의 시간을 문자열 반환, 인수생략시 브라우저의 로캘적용
+---
+</br>
+
+## Date 활용 시계예제
+```
+(function printNow() {
+  const today = new Date();
+
+  const dayNames = [
+    '(일요일)',
+    '(월요일)',
+    '(화요일)',
+    '(수요일)',
+    '(목요일)',
+    '(금요일)',
+    '(토요일)'
+  ];
+  // getDay 메서드는 해당 요일(0 ~ 6)을 나타내는 정수를 반환한다.
+  const day = dayNames[today.getDay()];
+
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1;
+  const date = today.getDate();
+  let hour = today.getHours();
+  let minute = today.getMinutes();
+  let second = today.getSeconds();
+  const ampm = hour >= 12 ? 'PM' : 'AM';
+
+  // 12시간제로 변경
+  hour %= 12;
+  hour = hour || 12; // hour가 0이면 12를 재할당
+
+  // 10미만인 분과 초를 2자리로 변경
+  minute = minute < 10 ? '0' + minute : minute;
+  second = second < 10 ? '0' + second : second;
+
+  const now = `${year}년 ${month}월 ${date}일 ${day} ${hour}:${minute}:${second} ${ampm}`;
+
+  console.log(now);
+
+  // 1초마다 printNow 함수를 재귀 호출한다. 41.2.1절 "setTimeout / clearTimeout" 참고
+  setTimeout(printNow, 1000);
+}());
+```
